@@ -103,7 +103,7 @@
                     <div class="col" style="padding-right: 10%;">
 
                         <p id="short_description" class="title text-xl-left">Loading..</p>
-                        <a name="" id="" class="btn btn-primary p-3" href="#" role="button"
+                        <a name="" id="" class="btn btn-primary p-3" href="/cv.pdf" target="_blank" role="button"
                             style="background-color: rgb(38, 134, 193);">CV Saya
                             <i class="fas fa-download" style="margin-left: 5px;"></i></a>
                     </div>
@@ -127,21 +127,21 @@
             <div class="container">
                 <h2 class="text-center">Pendidikan Saya</h2>
 
-                <div class="container mt-5 mb-5">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
                             <ul class="timeline" id="education-list">
-                                <!-- <li>
-                                    <h4>New Web Design</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam
-                                        non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis.
-                                        Duis sagittis ligula in sodales vehicula....</p>
-                                    <p>21 March, 2014</p>
-                                </li> -->
                             </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="projek">
+            <div class="container">
+                <h2 class="text-center">Projek Saya</h2>
+                <div class="row align-items-start pt-2" id="certificate-list"></div>
             </div>
         </section>
 
@@ -154,6 +154,12 @@
     <script>
         var typed = new Typed(".auto-type", {
             strings: ["Back-End Developer", "Python Developer", "NLP Developer"],
+            typeSpeed: 50,
+            backSpeed: 100,
+            loop: true
+        })
+        var loading = new Typed(".loading", {
+            strings: ["Loading..."],
             typeSpeed: 50,
             backSpeed: 100,
             loop: true
