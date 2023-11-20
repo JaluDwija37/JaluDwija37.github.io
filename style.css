@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:300;400;500;600;700");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 section {
     padding-top: 13%;
@@ -13,6 +13,58 @@ a {
     text-decoration: none;
     color: inherit;
     /* This will inherit the color from the parent element */
+}
+
+.animate {
+    opacity: 0;
+}
+
+.fade-right {
+    animation: fadeRight 700ms ease-in-out forwards;
+}
+
+.fade-left {
+    animation: fadeLeft 700ms ease-in-out forwards;
+}
+
+.fade-up {
+    animation: fadeUp 700ms ease-in-out forwards;
+}
+
+@keyframes fadeRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-120px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(120px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(150px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .top-navbar {
@@ -84,6 +136,8 @@ a {
     max-height: 40%;
     /* Ensure the image doesn't exceed its container */
 }
+
+
 
 #short_description {
     text-align: justify;
