@@ -59,8 +59,11 @@ function fetchProjectData() {
     fetch(apiUrl + "api/project/")
         .then(response => response.json())
         .then(projectData => {
-            // Fetch program data after fetching project data
-            fetchProgramDataForProjects(projectData);
+            // Sort project data by ID in descending order
+            const sortedProjectData = projectData.sort((a, b) => b.id - a.id);
+
+            // Fetch program data after sorting project data
+            fetchProgramDataForProjects(sortedProjectData);
         });
 }
 
@@ -359,7 +362,12 @@ function displayProjectData(data) {
     });
 }
 
+function showAlert() {
+    alert("Selamat Datang di Website Portofolioku. Jika beberapa bagian halaman tidak muncul silahkan Refresh halaman ini. Dikarenakan Website Portofolio ini menggunakan API");
+}
+
 // Call the functions when the page is loaded
+showAlert();
 fetchAboutData();
 fetchCertificateData();
 fetchSkillData();
@@ -372,6 +380,8 @@ ScrollReveal({
     duration: 2000,
     delay: 200
 });
+
+
 
 // ScrollReveal().reveal('.judul-tentang, .judul-keahlian , .judul-serti, .pendidikan', { origin: "top", cleanup: true });
 // ScrollReveal().reveal('.socials, .about-image', { origin: "left", cleanup: true });
