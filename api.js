@@ -1,36 +1,43 @@
 const apiUrl = 'https://jaludwija37.pythonanywhere.com/';
 
-function fetchAboutData() {
-    fetch(apiUrl + "api/about/")
+function fetchWithRetry(url, options) {
+    return fetch(url, options)
         .then(response => response.json())
-        .then(aboutData => {
-            displayAboutData(aboutData);
-            // console.log(aboutData);
+        .catch(error => {
+            // Check if it's a CORS error
+            if (error.name === 'TypeError' && error.message.includes('cross-origin')) {
+                handleCORSFailure();
+            } else {
+                // Log other types of errors
+                console.error('Fetch error:', error);
+            }
         });
 }
+
+function fetchAboutData() {
+    fetchWithRetry(apiUrl + "api/about/")
+        .then(aboutData => {
+            displayAboutData(aboutData);
+        });
+}
+
 function fetchCertificateData() {
-    fetch(apiUrl + "api/certificate/")
-        .then(response => response.json())
+    fetchWithRetry(apiUrl + "api/certificate/")
         .then(certificateData => {
             displayCertificatesData(certificateData);
-            // console.log(certificateData);
         });
 }
 
 function fetchSkillData() {
-    fetch(apiUrl + "api/skill/")
-        .then(response => response.json())
+    fetchWithRetry(apiUrl + "api/skill/")
         .then(skillData => {
-            // Fetch program data after fetching skill data
             fetchProgramData(skillData);
         });
 }
 
 function fetchProgramData(skillData) {
-    fetch(apiUrl + "api/program/")
-        .then(response => response.json())
+    fetchWithRetry(apiUrl + "api/program/")
         .then(programData => {
-            // Combine skillData and programData to create a new array with program details
             const combinedData = skillData.map(skill => {
                 const programDetails = programData.find(program => program.id === skill.program);
                 return {
@@ -40,29 +47,21 @@ function fetchProgramData(skillData) {
                 };
             });
 
-            // Call the function to display the combined data
             displaySkillsData(combinedData);
-            // console.log(combinedData);
         });
 }
 
 function fetchEducationData() {
-    fetch(apiUrl + "api/education/")
-        .then(response => response.json())
+    fetchWithRetry(apiUrl + "api/education/")
         .then(aboutData => {
             displayEducationData(aboutData);
-            // console.log(aboutData);
         });
 }
 
 function fetchProjectData() {
-    fetch(apiUrl + "api/project/")
-        .then(response => response.json())
+    fetchWithRetry(apiUrl + "api/project/")
         .then(projectData => {
-            // Sort project data by ID in descending order
             const sortedProjectData = projectData.sort((a, b) => b.id - a.id);
-
-            // Fetch program data after sorting project data
             fetchProgramDataForProjects(sortedProjectData);
         });
 }
@@ -362,12 +361,12 @@ function displayProjectData(data) {
     });
 }
 
-function showAlert() {
-    alert("Selamat Datang di Website Portofolioku. Jika beberapa bagian halaman tidak muncul silahkan Refresh halaman ini. Dikarenakan Website Portofolio ini menggunakan API");
-}
+// function showAlert() {
+//     alert("Selamat Datang di Website Portofolioku. Jika beberapa bagian halaman tidak muncul silahkan Refresh halaman ini. Dikarenakan Website Portofolio ini menggunakan API");
+// }
 
 // Call the functions when the page is loaded
-showAlert();
+// showAlert();
 fetchAboutData();
 fetchCertificateData();
 fetchSkillData();
